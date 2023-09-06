@@ -19,7 +19,7 @@ namespace UserClass
         /// </summary>
         /// <param name="filePath">파일 경로</param>
         /// <returns></returns>
-        private Bitmap LoadBitmapUnlocked(string filePath)
+        public Bitmap LoadBitmapUnlocked(string filePath)
         {
             using (Bitmap bitmap = new Bitmap(filePath))
             {
@@ -32,7 +32,7 @@ namespace UserClass
         /// </summary>
         /// <param name="image">이미지</param>
         /// <param name="filePath">파일 경로</param>
-        private void SaveImage(Image image, string filePath)
+        public void SaveImage(Image image, string filePath)
         {
             string fileExtension = Path.GetExtension(filePath);
 
