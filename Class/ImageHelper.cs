@@ -35,10 +35,13 @@ namespace UserClass
         /// <returns>Previous Image</returns>
         public Image PrevImage()
         {
-            imageStack.Pop();
-            Image prevImage = imageStack.Peek();
+            if (imageStack.Count > 1)
+            {
+                imageStack.Pop();
+                Image prevImage = imageStack.Peek();
 
-            return prevImage;
+                return prevImage;
+            }
         }
 
         /// <summary>
