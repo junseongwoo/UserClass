@@ -12,7 +12,34 @@ namespace UserClass
 {
     class ImageHelper
     {
-        // 
+        private Stack<Bitmap> bitmapStack = new Stack<Bitmap>();
+        private Stack<Image> imageStack = new Stack<Image>();
+
+        /// <summary>
+        /// 이미지 로드
+        /// </summary>
+        /// <param name="imagePath">이미지 경로</param>
+        /// <returns>Load Image</returns>
+        public Image LoadImage(string imagePath)
+        {
+            Image newImage = Image.FromFile(imagePath);
+            imageStack.Clear();
+            imageStack.Push(newImage);
+
+            return newImage;
+        }
+
+        /// <summary>
+        /// 이전 이미지를 가져온다.
+        /// </summary>
+        /// <returns>Previous Image</returns>
+        public Image PrevImage()
+        {
+            imageStack.Pop();
+            Image prevImage = imageStack.Peek();
+
+            return prevImage;
+        }
 
         /// <summary>
         /// LockBit 하지 않고 Bitmap Load 
