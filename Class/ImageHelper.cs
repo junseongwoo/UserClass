@@ -42,6 +42,7 @@ namespace UserClass
 
                 return prevImage;
             }
+            return imageStack.Peek();
         }
 
         /// <summary>
