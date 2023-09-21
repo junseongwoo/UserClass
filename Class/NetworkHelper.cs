@@ -6,14 +6,30 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace UserClass
 {
     class NetworkHelper
     {
         #region [생성자]
-        private SerialPort serialPort; 
+        private static NetworkHelper instance;
         #endregion
+
+        /// <summary>
+        /// Network Helper class 초기화 프로퍼티
+        /// </summary>
+        public static NetworkHelper Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new NetworkHelper();
+                }
+                return instance;
+            }
+        }
 
         /// <summary>
         /// Get Host IP 
@@ -79,6 +95,27 @@ namespace UserClass
             }
             catch (Exception ex)
             {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="server"></param>
+        /// <param name="port"></param>
+        public bool StartServer(TcpListener server, int port)
+        {
+            try
+            {
+                server = new TcpListener(IPAddress.Any, port);
+                server.Start();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Start Server Err : " + ex.ToString());
                 return false;
             }
         }
