@@ -13,41 +13,11 @@ namespace UserClass
     class NetworkHelper
     {
         #region [생성자]
-        private static NetworkHelper instance;
+
         #endregion
 
-        /// <summary>
-        /// Network Helper class 초기화 프로퍼티
-        /// </summary>
-        public static NetworkHelper Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new NetworkHelper();
-                }
-                return instance;
-            }
-        }
 
-        /// <summary>
-        /// Get Host IP 
-        /// </summary>
-        /// <returns>Host IP Address</returns>
-        public string GetHostIPAddress()
-        {
-            using (Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, 0))
-            {
-                socket.Connect("1.1.1.1", 9001);
-
-                IPEndPoint ipEndPoint = socket.LocalEndPoint as IPEndPoint;
-
-                string localIPAddress = ipEndPoint.Address.ToString();
-
-                return localIPAddress;
-            }
-        }
+        #region [Serial 통신]
 
         /// <summary>
         /// Serial Port 연결 
@@ -98,6 +68,56 @@ namespace UserClass
                 return false;
             }
         }
+
+        /// <summary>
+        /// Serial Data 전송 메서드
+        /// </summary>
+        /// <param name="data"></param>
+        public void SendData(SerialPort serial, string data)
+        {
+            try
+            {
+                if (serial.IsOpen)
+                {
+                    serial.WriteLine(data);
+                }
+                else
+                {
+                    MessageBox.Show("Serial Port is not Open");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Serial Data 전송 에러 : " + ex.ToString());
+            }
+        }
+
+
+        #endregion
+
+        #region [TCP / IP 통신]
+
+        #endregion
+
+        /// <summary>
+        /// Get Host IP 
+        /// </summary>
+        /// <returns>Host IP Address</returns>
+        public string GetHostIPAddress()
+        {
+            using (Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, 0))
+            {
+                socket.Connect("1.1.1.1", 9001);
+
+                IPEndPoint ipEndPoint = socket.LocalEndPoint as IPEndPoint;
+
+                string localIPAddress = ipEndPoint.Address.ToString();
+
+                return localIPAddress;
+            }
+        }
+
+        
 
         /// <summary>
         /// 
