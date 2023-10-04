@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Class\NetworkHelper.cs" />
     <Compile Include="Class\ImageHelper.cs" />
+    <Compile Include="Class\FileHelper.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
