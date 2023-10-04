@@ -103,14 +103,31 @@ namespace UserClass
         #region [Method : 객체를 JSON 문자열로 변환]
         public string SerializeToJson<T>(T data)
         {
-            return JsonConvert.SerializeObject(data, Formatting.Indented);
+            try
+            {
+                return JsonConvert.SerializeObject(data, Formatting.Indented);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"객체를 JSON 문자열로 변환 중 오류 발생 : {ex.ToString()}");
+                return null;
+            }
         }
         #endregion
 
         #region [Method : JSON 문자열을 객체로 변환]
         public T DeserializeFromJson<T>(string jsonText)
         {
-            return JsonConvert.DeserializeObject<T>(jsonText);
+            try
+            {
+                return JsonConvert.DeserializeObject<T>(jsonText);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"JSON 문자열을 객체로 변환 중 오류 발생 : {ex.ToString()}");
+                return default(T);
+            }
         }
         #endregion
 
